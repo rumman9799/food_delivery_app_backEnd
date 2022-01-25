@@ -11,7 +11,7 @@ const foodSchema = new mongoose.Schema({
     price: {
         type: String,
     },
-    food_major_category: {},
+    food_major_category: [],
     rating: {
         type: String,
     },

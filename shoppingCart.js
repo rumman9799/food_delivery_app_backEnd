@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 
 const shoppingCartSchema = new mongoose.Schema({
 
-    name: {
-        type: String,
-    },
+    name: [],
     food_type: {
         type: String,
     },
