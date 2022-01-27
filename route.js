@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose')
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('./user');
@@ -184,7 +185,7 @@ router.get('/recipt/:id', async (req, res) => {
 
 router.delete('/deleteuser/:id', async (req, res) => {
     try {
-        await User.deleteOne({ _id: req.params.id });
+        await User.deleteOne();
         res.json({ Message: 'Delete Complete' });
     }
     catch {
@@ -194,7 +195,7 @@ router.delete('/deleteuser/:id', async (req, res) => {
 
 router.delete('/deleterestaurant/:id', async (req, res) => {
     try {
-        await Restaurant.deleteOne({ _id: req.params.id });
+        await Restaurant.deleteOne();
         res.json({ Message: 'Delete Complete' });
     }
     catch {
@@ -204,7 +205,7 @@ router.delete('/deleterestaurant/:id', async (req, res) => {
 
 router.delete('/deletefood/:id', async (req, res) => {
     try {
-        await Food.deleteOne({ _id: req.params.id });
+        await Food.deleteOne();
         res.json({ Message: 'Delete Complete' });
     }
     catch {
@@ -214,7 +215,7 @@ router.delete('/deletefood/:id', async (req, res) => {
 
 router.delete('/deletecart/:id', async (req, res) => {
     try {
-        await ShoppingCart.deleteOne({ _id: req.params.id });
+        await ShoppingCart.deleteOne();
         res.json({ Message: 'Delete Complete' });
     }
     catch {
@@ -222,10 +223,9 @@ router.delete('/deletecart/:id', async (req, res) => {
     }
 })
 
-router.delete('/deleterecipt/:id', async(req, res) => {
+router.delete('/deleterecipt/:id', async (req, res) => {
     try {
- 
-        await Recipt.deleteOne({ _id: req.params.id });
+        await Recipt.deleteOne();
         res.json({ Message: 'Delete Complete' });
     }
     catch {
