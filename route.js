@@ -184,53 +184,53 @@ router.get('/recipt/:id', async (req, res) => {
 })
 
 router.delete('/deleteuser/:id', async (req, res) => {
-    try {
-        await User.deleteOne();
-        res.json({ Message: 'Delete Complete' });
-    }
-    catch {
-        res.json({ Error: 'Failed To Delete' });
-    }
+    await User.deleteOne({ _id: req.params.id })
+        .then((success) => {
+            res.json(success);
+        })
+        .catch((error) => {
+            res.json(error)
+        })
 })
 
 router.delete('/deleterestaurant/:id', async (req, res) => {
-    try {
-        await Restaurant.deleteOne();
-        res.json({ Message: 'Delete Complete' });
-    }
-    catch {
-        res.json({ Error: 'Failed To Delete' });
-    }
+    await Restaurant.deleteOne({ _id: req.params.id })
+        .then((success) => {
+            res.json(success);
+        })
+        .catch((error) => {
+            res.json(error)
+        })
 })
 
 router.delete('/deletefood/:id', async (req, res) => {
-    try {
-        await Food.deleteOne();
-        res.json({ Message: 'Delete Complete' });
-    }
-    catch {
-        res.json({ Error: 'Failed To Delete' });
-    }
+    await Food.deleteOne({ _id: req.params.id })
+        .then((success) => {
+            res.json(success);
+        })
+        .catch((error) => {
+            res.json(error)
+        })
 })
 
 router.delete('/deletecart/:id', async (req, res) => {
-    try {
-        await ShoppingCart.deleteOne();
-        res.json({ Message: 'Delete Complete' });
-    }
-    catch {
-        res.json({ Error: 'Failed To Delete' });
-    }
+    await ShoppingCart.deleteOne({ _id: req.params.id })
+        .then((success) => {
+            res.json(success);
+        })
+        .catch((error) => {
+            res.json(error)
+        })
 })
 
 router.delete('/deleterecipt/:id', async (req, res) => {
-    try {
-        await Recipt.deleteOne();
-        res.json({ Message: 'Delete Complete' });
-    }
-    catch {
-        res.json({ Error: 'Failed To Delete' });
-    }
+    await Recipt.deleteOne({ _id: req.params.id })
+        .then((success) => {
+            res.json(success);
+        })
+        .catch((error) => {
+            res.json(error)
+        })
 })
 
 module.exports = router;
