@@ -182,4 +182,55 @@ router.get('/recipt/:id', async (req, res) => {
     res.json(recipt)
 })
 
+router.delete('/deleteuser/:id', async (req, res) => {
+    try {
+        await User.deleteOne({ _id: req.params.id });
+        res.json({ Message: 'Delete Complete' });
+    }
+    catch {
+        res.json({ Error: 'Failed To Delete' });
+    }
+})
+
+router.delete('/deleterestaurant/:id', async (req, res) => {
+    try {
+        await Restaurant.deleteOne({ _id: req.params.id });
+        res.json({ Message: 'Delete Complete' });
+    }
+    catch {
+        res.json({ Error: 'Failed To Delete' });
+    }
+})
+
+router.delete('/deletefood/:id', async (req, res) => {
+    try {
+        await Food.deleteOne({ _id: req.params.id });
+        res.json({ Message: 'Delete Complete' });
+    }
+    catch {
+        res.json({ Error: 'Failed To Delete' });
+    }
+})
+
+router.delete('/deletecart/:id', async (req, res) => {
+    try {
+        await ShoppingCart.deleteOne({ _id: req.params.id });
+        res.json({ Message: 'Delete Complete' });
+    }
+    catch {
+        res.json({ Error: 'Failed To Delete' });
+    }
+})
+
+router.delete('/deleterecipt/:id', async(req, res) => {
+    try {
+ 
+        await Recipt.deleteOne({ _id: req.params.id });
+        res.json({ Message: 'Delete Complete' });
+    }
+    catch {
+        res.json({ Error: 'Failed To Delete' });
+    }
+})
+
 module.exports = router;
