@@ -131,6 +131,7 @@ router.post('/createfood', async (req, res) => {
         name: req.body.name,
         restaurant_id: req.body.restaurant_id,
         price: req.body.price,
+        generalType: req.body.generalType,
         food_major_category: req.body.food_major_category,
         rating: req.body.rating,
         image_link: req.body.image_link,
