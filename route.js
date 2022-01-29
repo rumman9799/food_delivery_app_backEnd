@@ -7,7 +7,7 @@ const Restaurant = require('./restaurant');
 const Food = require('./food');
 const ShoppingCart = require('./shoppingCart');
 const Recipt = require('./recipt')
-
+const Tnx = require('./tnxHistory')
 router.get('/home', (req, res) => {
     res.send('Food Delivery Service Home Page')
 });
@@ -101,9 +101,9 @@ router.get('/restaurants/:id/:fid', async (req, res) => {
 
 router.post('/createshoppingcart', async (req, res) => {
     const newShoppingCart = new ShoppingCart({
-        name: req.body.name,
-        food_type: req.body.food_type,
-        count: req.body.count
+        food_id: req.body.food_id,
+        total_amount: req.body.total_amount,
+        status: 'Unpaid'
     });
     await newShoppingCart.save();
     res.status(200).json({
@@ -184,6 +184,11 @@ router.get('/recipt/:id', async (req, res) => {
     res.json(recipt)
 })
 
+router.get('/food/:id', async (req, res) => {
+    const food = await Food.find({ _id: req.params.id });
+    res.json(food)
+})
+
 router.delete('/deleteuser/:id', async (req, res) => {
     await User.deleteOne({ _id: req.params.id })
         .then((success) => {
@@ -233,5 +238,60 @@ router.delete('/deleterecipt/:id', async (req, res) => {
             res.json(error)
         })
 })
+
+router.post('/addfavouritefood/:id', async (req, res) => {
+    try {
+        await User.updateOne({
+            _id: req.params.id
+        },
+            {
+                $push: {
+                    favourite_food: req.body.favourite_food
+                }
+            })
+        res.json({ Message: "Favourite Food Added" })
+    }
+    catch {
+        res.json({ Message: "Error Adding Favourite Food" })
+
+    }
+})
+
+router.post('/createtnx/:id', async (req,res) => {
+    try{
+        const newTnx = new Tnx({
+            shopping_cart_id:req.params.id,
+            user_id:req.body.user_id,
+            total_amount:req.body.total_amount,
+            date:new Date().toString()
+        })
+        await newTnx.save()
+        await ShoppingCart.updateOne({
+            _id: req.params.id
+        },
+            {
+                $set: {
+                    status: 'Paid'
+                }
+            })
+        res.json({ Message: "Transaction Info Added" })
+
+    }
+    catch{
+        res.json({ Message: "Error Adding Transaction Info" })
+
+    }
+})
+
+router.get('/tnx', async (req, res) => {
+    const tnx = await Tnx.find();
+    res.json(tnx)
+})
+
+router.get('/tnx/:id', async (req, res) => {
+    const tnx = await Tnx.findOne({ _id: req.params.id });
+    res.json(tnx)
+})
+
 
 module.exports = router;

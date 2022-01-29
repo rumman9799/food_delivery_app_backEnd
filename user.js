@@ -13,7 +13,12 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String
-    }
+    },
+    favourite_food:[
+        {
+            type: String
+        }
+    ]
 });
 
 const User = new mongoose.model('User', userSchema);
