@@ -101,7 +101,7 @@ router.get('/restaurants/:id/:fid', async (req, res) => {
 
 router.post('/createshoppingcart', async (req, res) => {
     const newShoppingCart = new ShoppingCart({
-        food_id: req.body.food_id,
+        cart_items: req.body.cart_items,
         total_amount: req.body.total_amount,
         status: 'Unpaid',
         user_id:req.body.user_id
