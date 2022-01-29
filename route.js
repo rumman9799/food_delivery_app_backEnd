@@ -176,6 +176,10 @@ router.get('/cart/:id', async (req, res) => {
     res.json(cart)
 })
 
+router.get('/usercart/:id', async (req, res) => {
+    const cart = await ShoppingCart.findOne({ user_id: req.params.id });
+    res.json(cart)
+})
 router.get('/recipts', async (req, res) => {
     const recipts = await Recipt.find();
     res.json(recipts)
