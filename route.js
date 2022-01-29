@@ -103,7 +103,8 @@ router.post('/createshoppingcart', async (req, res) => {
     const newShoppingCart = new ShoppingCart({
         food_id: req.body.food_id,
         total_amount: req.body.total_amount,
-        status: 'Unpaid'
+        status: 'Unpaid',
+        user_id:req.body.user_id
     });
     await newShoppingCart.save();
     res.status(200).json({

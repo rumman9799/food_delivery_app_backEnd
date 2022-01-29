@@ -8,6 +8,9 @@ const shoppingCartSchema = new mongoose.Schema({
     },
     status: {
         type: String,
+    },
+    user_id: {
+        type: String,
     }
 });
 
